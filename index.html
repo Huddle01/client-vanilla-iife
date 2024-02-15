@@ -4,45 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="https://unpkg.com/@huddle01/web-core@1.0.0-beta.13/dist/index.global.js"></script>
+    <script src="https://unpkg.com/@huddle01/web-core@2.0.2-umd.0/dist/index.global.js"></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div>
       Me Video: <br />
-      <video id="localVideo" autoplay muted></video>
+      <video
+        id="localVideo"
+        autoplay
+        muted
+        style="width: 50%; height: 50%"
+      ></video>
     </div>
     <div id="remoteVideos"></div>
+    <input
+      style="padding: 2px"
+      id="roomId"
+      type="text"
+      value="gxc-tiqi-qlw"
+      placeholder="Enter Room ID"
+    />
+    <input id="accessToken" type="text" placeholder="Enter Access Token" />
     <button onClick="init()">Join Room</button>
     <button onClick="enableVideo()">Enable Video</button>
-    <script>
-      let client;
-
-      const init = async () => {
-        client = new HuddleWebCore.HuddleClient({
-          projectId: "YOUR_PROJECT_ID",
-          options: {
-            activeSpeakers: {
-              // Number of active speaker visible in the grid, by default 8
-              size: 10,
-            },
-          },
-        });
-        const room = await client.joinRoom({
-          roomId: "YOUR_ROOM_ID",
-          token: "YOUR_ACCESS_TOKEN",
-        });
-        console.log({ room });
-      };
-
-      const enableVideo = async () => {
-        await client.localPeer.enableVideo();
-        const stream = await client.localPeer.getStream({
-          label: "video",
-        });
-        const video = document.getElementById("localVideo");
-        video.srcObject = stream;
-      };
-    </script>
+    <button onClick="enableAudio()">Enable Audio</button>
+    <script src="./huddle.js"></script>
   </body>
 </html>
