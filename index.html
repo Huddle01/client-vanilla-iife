@@ -5,30 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://unpkg.com/@huddle01/web-core@2.0.2-umd.0/dist/index.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div>
-      Me Video: <br />
-      <video
-        id="localVideo"
-        autoplay
-        muted
-        style="width: 50%; height: 50%"
-      ></video>
+    <div class="flex flex-col items-center justify-center p-4">
+      <div class="flex">
+        <input
+          placeholder="Room ID"
+          id="roomId"
+          type="text"
+          class="border-2 border-blue-400 rounded-lg p-2 mx-2 bg-black text-white"
+        />
+
+        <input
+          placeholder="Access Token"
+          id="accessToken"
+          type="text"
+          class="border-2 border-blue-400 rounded-lg p-2 mx-2 bg-black text-white"
+        />
+
+        <input
+          placeholder="Display Name"
+          id="displayName"
+          type="text"
+          class="border-2 border-blue-400 rounded-lg p-2 mx-2 bg-black text-white"
+        />
+
+        <button
+          type="button"
+          id="joinRoom"
+          class="bg-blue-500 p-2 mx-2 rounded-lg"
+        >
+          Join Room
+        </button>
+
+        <button class="bg-blue-500 p-2 mx-2 rounded-lg" id="video">
+          Enable Video
+        </button>
+        <button class="bg-blue-500 p-2 mx-2 rounded-lg" id="audio">
+          Enable Audio
+        </button>
+        <button class="bg-blue-500 p-2 mx-2 rounded-lg" id="screen">
+          Share Screen
+        </button>
+      </div>
+
+      <div class="flex-1 items-center flex flex-col mt-8">
+        <div class="flex gap-2">
+          <div
+            class="w-1/2 mx-auto border-2 rounded-xl border-blue-400 object-contain"
+          >
+            <video id="videoRef" autoplay class="aspect-video" muted></video>
+          </div>
+          <div
+            class="w-1/2 mx-auto border-2 rounded-xl border-blue-400 object-contain"
+          >
+            <video id="screenRef" class="aspect-video" autoplay muted></video>
+          </div>
+        </div>
+      </div>
+      <div id="remotePeers" class="flex flex-col gap-2 mt-4"></div>
     </div>
-    <div id="remoteVideos"></div>
-    <input
-      style="padding: 2px"
-      id="roomId"
-      type="text"
-      value="gxc-tiqi-qlw"
-      placeholder="Enter Room ID"
-    />
-    <input id="accessToken" type="text" placeholder="Enter Access Token" />
-    <button onClick="init()">Join Room</button>
-    <button onClick="enableVideo()">Enable Video</button>
-    <button onClick="enableAudio()">Enable Audio</button>
     <script src="./huddle.js"></script>
   </body>
 </html>
